@@ -11,7 +11,11 @@ find_package(Qt5 COMPONENTS
         Core
         REQUIRED)
 
-add_executable(CopyFinderV2 main.cpp)
+add_executable(CopyFinderV2 main.cpp
+        utils/Dir.cpp
+        utils/Dir.h
+        utils/File.cpp
+        utils/File.h)
 target_link_libraries(CopyFinderV2
         Qt5::Core
 )
