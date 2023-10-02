@@ -21,7 +21,7 @@ bool Dir::is_exists(string &path) {
 }
 
 bool Dir::find_epath(string &path, list<string> epaths) {
-    return any_of(epaths.begin(), epaths.end(), [path](const std::string& mask){
+    return all_of(epaths.begin(), epaths.end(), [path](const std::string& mask){
        return path.find(mask) == std::string::npos;
    });
 }

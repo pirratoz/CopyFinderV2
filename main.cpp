@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
         else if (currentFlag.contains(QRegExp("--sb|--sizeblock"))) sizeBlock = argument.toULongLong();
         else if (currentFlag.contains(QRegExp("--sf|--sizefile"))) sizeFile = argument.toULongLong();
         else {
-            if (currentFlag.contains(QRegExp("-p|--path"))) pathArguments.append(argument);
+            if (currentFlag.contains(QRegExp("--p|--path"))) pathArguments.append(argument);
             if (currentFlag.contains(QRegExp("--up|--upath"))) upathArguments.append(argument);
             if (currentFlag.contains(QRegExp("--mf|--maskfile"))) maskArguments.append(argument);
         }
