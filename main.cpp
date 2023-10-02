@@ -4,6 +4,8 @@
 #include <QStringList>
 #include <QDebug>
 
+#include "controller/Controller.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -87,4 +89,19 @@ int main(int argc, char *argv[])
     qDebug() << "Include Path: " << pathArguments;
     qDebug() << "Exclude Path: " << upathArguments;
     qDebug() << "Masks: " << maskArguments;
+
+    if (pathArguments.empty()){
+        qDebug() << "Path for scanning not setup";
+        return 0;
+    }
+
+    Controller controller = Controller(
+            pathArguments,
+            maskArguments,
+            upathArguments,
+            parser.isSet(checkNestingDirectoryOption),
+            (unsigned)sizeFile,
+            (unsigned)sizeBlock
+    );
+    controller.handle_folders();
 }

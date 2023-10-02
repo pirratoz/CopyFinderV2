@@ -15,8 +15,11 @@ add_executable(CopyFinderV2 main.cpp
         utils/Dir.cpp
         utils/Dir.h
         utils/File.cpp
-        utils/File.h)
+        utils/File.h
+        controller/Controller.cpp)
 target_link_libraries(CopyFinderV2
         Qt5::Core
 )
-
+target_link_libraries(CopyFinderV2
+        stdc++fs
+)
