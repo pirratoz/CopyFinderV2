@@ -3,6 +3,7 @@
 #include <QCommandLineOption>
 #include <QStringList>
 #include <QDebug>
+#include <QRegExp>
 
 #include "controller/Controller.h"
 
@@ -75,12 +76,12 @@ int main(int argc, char *argv[])
         QString argument = QString(argv[i]);
         if (argument.startsWith("--")) currentFlag = argument;
         else if (argument.startsWith("-")) continue;
-        else if (currentFlag.contains(R"(--sb|--sizeblock)")) sizeBlock = argument.toULongLong();
-        else if (currentFlag.contains(R"(--sf|--sizefile)")) sizeFile = argument.toULongLong();
+        else if (currentFlag.contains(QRegExp("--sb|--sizeblock"))) sizeBlock = argument.toULongLong();
+        else if (currentFlag.contains(QRegExp("--sf|--sizefile"))) sizeFile = argument.toULongLong();
         else {
-            if (currentFlag == "--path") pathArguments.append(argument);
-            if (currentFlag == "--upath") upathArguments.append(argument);
-            if (currentFlag == "--maskfile") maskArguments.append(argument);
+            if (currentFlag.contains(QRegExp("-p|--path"))) pathArguments.append(argument);
+            if (currentFlag.contains(QRegExp("--up|--upath"))) upathArguments.append(argument);
+            if (currentFlag.contains(QRegExp("--mf|--maskfile"))) maskArguments.append(argument);
         }
     }
     qDebug() << "Check nested dir: " << parser.isSet(checkNestingDirectoryOption);
@@ -95,6 +96,8 @@ int main(int argc, char *argv[])
         return 0;
     }
 
+    qDebug() << "\nScanning started:\n";
+
     Controller controller = Controller(
             pathArguments,
             maskArguments,
@@ -104,4 +107,6 @@ int main(int argc, char *argv[])
             (unsigned)sizeBlock
     );
     controller.handle_folders();
+
+    qDebug() << "Scanning finished";
 }
