@@ -31,7 +31,7 @@ description:
 description parameters:
     "param1" - unsigned integer (default 1)
 examples:
-    --fs 512
+    --sf 512
     --sizefile 1024
 ```
 ```sh
